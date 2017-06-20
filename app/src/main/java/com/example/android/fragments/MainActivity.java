@@ -26,20 +26,20 @@ public class MainActivity extends AppCompatActivity {
         btn2=(Button)findViewById(R.id.btn2);
         btn3=(Button)findViewById(R.id.btn3);
         final FragmentManager FragMan=getSupportFragmentManager();
-        final CourseFragment clFrag=new CourseFragment();
+        //final CourseFragment clFrag=new CourseFragment();
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Log.d(TAG,"btn1");
+                Course2Fragment cfrag=Course2Fragment.newInstance("Pandora","Arnav","Java");
                 FragMan.beginTransaction()
-                        .replace(R.id.FragContainer,clFrag)
+                        .replace(R.id.FragContainer,cfrag)
                         .commit();
-
 
             }
         });
-        btn2.setOnClickListener(new View.OnClickListener() {
+        /*btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"btn2");
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         "Java"
                 );
             }
-        });
+        });*/
 
     }
 }
