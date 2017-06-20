@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArrayList<Course> courses=new ArrayList<>();
+        final ArrayList<Course> courses=new ArrayList<>();
         courses.add(new Course("Pandora","Arnav","Java"));
         courses.add(new Course("Crux","Sumeet","Java"));
         courses.add(new Course("Algo++","Arnav","C++"));
@@ -27,29 +27,25 @@ public class MainActivity extends AppCompatActivity {
         btn3=(Button)findViewById(R.id.btn3);
         final FragmentManager FragMan=getSupportFragmentManager();
         //final CourseFragment clFrag=new CourseFragment();
-        btn1.setOnClickListener(new View.OnClickListener() {
+
+        View.OnClickListener courseButtonListener =new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG,"btn1");
-                Course2Fragment cfrag=Course2Fragment.newInstance("Pandora","Arnav","Java");
+                Course course=null;
+                switch (v.getId()){
+                    case R.id.btn1:course=courses.get(0);break;
+                    case R.id.btn2:course=courses.get(1);break;
+                    case R.id.btn3:course=courses.get(2);break;
+                }
                 FragMan.beginTransaction()
-                        .replace(R.id.FragContainer,cfrag)
+                        .replace(R.id.FragContainer,Course2Fragment.newInstance(course))
                         .commit();
-
             }
-        });
-        /*btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG,"btn2");
-                clFrag.setData(
-                        "Pandora",
-                        "Arnav",
-                        "Java"
-                );
-            }
-        });*/
+        };
+        btn1.setOnClickListener(courseButtonListener);
+        btn2.setOnClickListener(courseButtonListener);
+        btn3.setOnClickListener(courseButtonListener);
 
     }
 }
